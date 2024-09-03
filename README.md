@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+npm i
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# MVVM (Model-View-ViewModel) com Next.js
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+MVVM (Model-View-ViewModel) é um padrão de arquitetura de software que separa a lógica de apresentação da lógica de negócios e dos dados. Ele é amplamente utilizado em aplicações com interfaces de usuário complexas, como as de desktop e mobile, mas também pode ser aplicado em aplicações web.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Componentes do MVVM
 
-## Learn More
+### Model (Dados)
+Representa a estrutura dos dados e a lógica de negócios. Ele não tem conhecimento da UI e é responsável por fornecer e manipular os dados.
 
-To learn more about Next.js, take a look at the following resources:
+- **Obter:** chamadas a API
+- **Manipular:** gerenciamento de estados (Redux) ou similar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Estrutura de pastas:
+```
+/models
+    /stores (Redux)
+    /services (Chamadas a API)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### View (Tela)
+É a camada de interface do usuário. Ela exibe os dados e permite a interação do usuário, mas não contém lógica de negócios. A View é responsável por exibir a interface do usuário e interagir com o usuário.
 
-## Deploy on Vercel
+Estrutura de pastas:
+```
+/pages ou /templates
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ViewModel (Abstração)
+Atua como uma ponte entre o Model e a View. Ele contém a lógica de apresentação e manipula os dados que a View exibe. A ViewModel pode comunicar-se com o Model para buscar ou manipular dados e expô-los de uma forma que a View possa utilizar.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Estrutura de pastas:
+```
+/view-model
+    /hooks
+    /utils
+    /components
+```
+
+### Conceitos Importantes
+- A ViewModel pode utilizar vários Models diferentes mas uma view pode chamar um único ViewModel.
+- A ideia é separar o código em três partes: Dados, Visão e Abstração.
+
+## Referências
+- [Medium - MVVM: Simplificando o Desenvolvimento Mobile para Iniciantes](https://medium.com/orangejuicefc/mvvm-simplificando-o-desenvolvimento-mobile-para-iniciantes-419ade97bc42)
+- [GitHub - Next.js Architecture MVVM](https://github.com/GabrielFratelli/nextjs-architecture-mvvm/tree/main)
