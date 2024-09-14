@@ -12,8 +12,5 @@ export const fieldsTypes = {
 
 export type FieldType = keyof typeof fieldsTypes;
 
-export const useForm = () => {
-  const validate = (type: FieldType, value: any) => fieldsTypes[type](value);
-
-  return { validate };
-};
+export const validate = (type: FieldType, value: any) =>
+  fieldsTypes[type](value);

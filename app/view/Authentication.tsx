@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
-
 import { useAuthentication, TextField } from "@/app/view-model";
 import { Box, Button, Container, Typography } from "@mui/material";
 
 const Login: React.FC = () => {
-  const { fields, error, validate, handleChangeField, handleSubmit } =
+  const { fields, error, handleValidate, handleChange, handleSubmit } =
     useAuthentication();
 
   return (
@@ -26,22 +25,27 @@ const Login: React.FC = () => {
           component="form"
           onSubmit={handleSubmit}
           noValidate
-          sx={{ mt: 1, gap: "16px", display: "flex", flexDirection: "column" }}
+          sx={{
+            mt: 1,
+            gap: "16px",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
           <TextField
             value={fields.login}
             errorMessage={error?.login?.message ?? ""}
             onChange={(e) => {
-              handleChangeField("login", e.target.value);
-              validate("login", e.target.value);
+              handleChange("login", e.target.value);
+              handleValidate("login", e.target.value);
             }}
           />
           <TextField
             value={fields.password}
             errorMessage={error?.password?.message ?? ""}
             onChange={(e) => {
-              handleChangeField("password", e.target.value);
-              validate("password", e.target.value);
+              handleChange("password", e.target.value);
+              handleValidate("password", e.target.value);
             }}
           />
           <Button
